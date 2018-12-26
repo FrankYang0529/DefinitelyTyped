@@ -25,8 +25,11 @@
 //                 Trevor Leach <https://github.com/trevor-leach>
 //                 James Gregory <https://github.com/jagregory>
 //                 Erik Dalén <https://github.com/dalen>
+//                 Frank Yang <https://github.com/FrankYang0529>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
+
+/// <reference types="node" />
 
 // API Gateway "event" request context
 export interface APIGatewayEventRequestContext {
@@ -867,10 +870,41 @@ export interface SQSRecordAttributes {
     SenderId: string;
     ApproximateFirstReceiveTimestamp: string;
 }
-export interface SQSMessageAttribute {
-    Name: string;
-    Type: string;
-    Value: string;
+export type SQSMessageAttribute = SQSMessageAttributeStringValue | SQSMessageAttributeBinaryValue;
+
+export type Binary = Buffer | Uint8Array | string;
+export interface SQSMessageAttributeStringValue {
+    /**
+     * Strings are Unicode with UTF-8 binary encoding. For a list of code values, see ASCII Printable Characters.
+     */
+    stringValue: string;
+    /**
+     * Not implemented. Reserved for future use.
+     */
+    stringListValues: string[];
+    /**
+     * Not implemented. Reserved for future use.
+     */
+    binaryListValues: Binary[];
+    /**
+     * Amazon SQS supports the following logical data types: String, Number, and Binary. For the Number data type, you must use StringValue.
+     */
+    dataType: 'String' | 'Number';
+}
+export interface SQSMessageAttributeBinaryValue {
+    /**
+     * Binary type attributes can store any binary data, such as compressed data, encrypted data, or images.
+     */
+    binaryValue: Binary;
+    /**
+     * Not implemented. Reserved for future use.
+     */
+    stringListValues: string[];
+    /**
+     * Not implemented. Reserved for future use.
+     */
+    binaryListValues: Binary[];
+    dataType: 'Binary';
 }
 export interface SQSMessageAttributes {
     [name: string]: SQSMessageAttribute;

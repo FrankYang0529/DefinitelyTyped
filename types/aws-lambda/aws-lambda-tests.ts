@@ -992,7 +992,26 @@ const SQSEvent: AWSLambda.SQSEvent = {
                 SenderId: "594035263019",
                 ApproximateFirstReceiveTimestamp: "1529104986230"
             },
-            messageAttributes: {},
+            messageAttributes: {
+                binaryValue: {
+                    binaryValue: new Buffer('test'),
+                    stringListValues: [],
+                    binaryListValues: [],
+                    dataType: 'Binary'
+                },
+                stringValue: {
+                    stringValue: 'test',
+                    stringListValues: [],
+                    binaryListValues: [],
+                    dataType: 'String'
+                },
+                numberValue: {
+                    stringValue: '123',
+                    stringListValues: [],
+                    binaryListValues: [],
+                    dataType: 'Number'
+                }
+            },
             md5OfBody: "9bb58f26192e4ba00f01e2e7b136bbd8",
             eventSource: "aws:sqs",
             eventSourceARN: "arn:aws:sqs:us-west-2:594035263019:NOTFIFOQUEUE",
